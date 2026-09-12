@@ -9,7 +9,7 @@ class ClassController extends Controller
 {
     public function index()
     {
-        return view('classes.index', ['classes' => SchoolClass::all()]);
+        return view('classes.index', ['classes' => SchoolClass::withCount(['students', 'courses'])->latest()->get()]);
     }
 
     public function create()

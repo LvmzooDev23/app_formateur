@@ -10,7 +10,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        return view('courses.index', ['courses' => Course::with('schoolClass')->get()]);
+        return view('courses.index', ['courses' => Course::with('schoolClass')->withCount('exams')->latest()->get()]);
     }
 
     public function create()

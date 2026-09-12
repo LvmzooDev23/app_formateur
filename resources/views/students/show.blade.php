@@ -5,7 +5,7 @@
                 <a href="{{ route('students.index') }}" class="p-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-slate-200 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </a>
-                <h2 class="text-2xl font-bold text-slate-800 leading-tight">Fiche Bilan Étudiant</h2>
+                <h2 class="text-2xl font-bold text-slate-900 leading-tight">Fiche Bilan Étudiant</h2>
             </div>
         </div>
     </x-slot>
@@ -14,14 +14,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Profil Header -->
             <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 mb-8">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                     <div class="flex items-center gap-6">
-                        <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-3xl font-bold">
+                        <div class="w-20 h-20 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg shadow-indigo-200">
                             {{ substr($student->first_name, 0, 1) }}{{ substr($student->last_name, 0, 1) }}
                         </div>
                         <div>
                             <h3 class="text-3xl font-extrabold text-slate-900">{{ $student->first_name }} {{ $student->last_name }}</h3>
-                            <p class="text-slate-500 font-medium">Classe : <span class="text-indigo-600">{{ $student->schoolClass->name }}</span></p>
+                            <p class="text-slate-500 font-medium">Classe : <span class="text-indigo-600 font-semibold">{{ $student->schoolClass->name }}</span></p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -46,7 +46,10 @@
                 <div class="lg:col-span-1">
                     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden h-full">
                         <div class="p-6 border-b border-slate-100 bg-slate-50/50">
-                            <h4 class="font-bold text-slate-800">Historique Émargement</h4>
+                            <h4 class="font-bold text-slate-800 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 5h.01M12 12h.01M12 15h.01M12 18h.01M15 12h.01M9 12h.01"></path></svg>
+                                Historique Émargement
+                            </h4>
                         </div>
                         <div class="p-4 space-y-3">
                             @forelse($student->attendances->sortByDesc('date') as $attendance)
@@ -73,7 +76,10 @@
                 <div class="lg:col-span-2">
                     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                         <div class="p-6 border-b border-slate-100 bg-slate-50/50">
-                            <h4 class="font-bold text-slate-800">Relevé de Notes détaillé</h4>
+                            <h4 class="font-bold text-slate-800 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Relevé de Notes détaillé
+                            </h4>
                         </div>
                         <table class="min-w-full divide-y divide-slate-200">
                             <thead class="bg-slate-50">

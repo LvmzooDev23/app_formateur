@@ -1,40 +1,43 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Modifier l\'Examen') }}
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-slate-900 leading-tight">Modifier l'Examen</h2>
+        </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <form method="POST" action="{{ route('exams.update', $exam->id) }}">
+        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
+                <form method="POST" action="{{ route('exams.update', $exam->id) }}" class="space-y-6">
                     @csrf @method('PUT')
-                    <div class="mb-4">
-                        <x-input-label for="title" value="Titre de l'examen" />
-                        <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" value="{{ $exam->title }}" required autofocus />
+                    <div>
+                        <label for="title" class="block text-sm font-semibold text-slate-700 mb-2">Titre de l'évaluation</label>
+                        <input type="text" name="title" id="title" value="{{ $exam->title }}" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required autofocus>
                     </div>
-                    <div class="mb-4">
-                        <x-input-label for="course_id" value="Cours associé" />
-                        <select name="course_id" id="course_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                    <div>
+                        <label for="course_id" class="block text-sm font-semibold text-slate-700 mb-2">Cours associé</label>
+                        <select name="course_id" id="course_id" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required>
                             <option value="">-- Sélectionner un cours --</option>
                             @foreach($courses as $course)
                                 <option value="{{ $course->id }}" {{ $exam->course_id == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <x-input-label for="exam_date" value="Date de l'examen" />
-                            <input type="date" name="exam_date" id="exam_date" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" value="{{ $exam->exam_date->format('Y-m-d') }}" required />
+                            <label for="exam_date" class="block text-sm font-semibold text-slate-700 mb-2">Date de l'examen</label>
+                            <input type="date" name="exam_date" id="exam_date" value="{{ $exam->exam_date->format('Y-m-d') }}" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required>
                         </div>
                         <div>
-                            <x-input-label for="coefficient" value="Coefficient" />
-                            <x-text-input id="coefficient" name="coefficient" type="number" step="0.01" class="mt-1 block w-full" value="{{ $exam->coefficient }}" required />
+                            <label for="coefficient" class="block text-sm font-semibold text-slate-700 mb-2">Coefficient</label>
+                            <input type="number" step="0.01" name="coefficient" id="coefficient" value="{{ $exam->coefficient }}" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required>
                         </div>
                     </div>
-                    <div class="flex justify-end">
-                        <x-primary-button>Mettre à jour</x-primary-button>
+                    <div class="flex justify-end gap-3 pt-4">
+                        <a href="{{ route('exams.index') }}" class="px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Annuler</a>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-2 text-sm">
+                            Mettre à jour l'examen
+                        </button>
                     </div>
                 </form>
             </div>
