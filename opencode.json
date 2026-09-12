@@ -1,0 +1,9 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/qwen2.5-coder:7b",
+  "providers": {
+    "ollama": {
+      "baseURL": "http://localhost:11434"
+    }
+  }
+}
