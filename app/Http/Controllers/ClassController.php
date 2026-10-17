@@ -9,7 +9,9 @@ class ClassController extends Controller
 {
     public function index()
     {
-        return view('classes.index', ['classes' => SchoolClass::withCount(['students', 'courses'])->latest()->get()]);
+        $classes = SchoolClass::withCount(['students', 'courses'])->latest()->get();
+
+        return view('classes.index', compact('classes'));
     }
 
     public function create()
@@ -21,24 +23,30 @@ class ClassController extends Controller
     {
         $request->validate(['name' => 'required|string|max:255']);
         SchoolClass::create($request->only('name'));
+
         return redirect()->route('classes.index')->with('success', 'Classe créée.');
     }
 
-    public function edit(SchoolClass $schoolClass)
+    public function edit($id)
     {
-        return view('classes.edit', ['class' => $schoolClass]);
+        $class = SchoolClass::findOrFail($id);
+
+        return view('classes.edit', compact('class'));
     }
 
-    public function update(Request $request, SchoolClass $schoolClass)
+    public function update(Request $request, $id)
     {
+        $class = SchoolClass::findOrFail($id);
         $request->validate(['name' => 'required|string|max:255']);
-        $schoolClass->update($request->only('name'));
+        $class->update($request->only('name'));
+
         return redirect()->route('classes.index')->with('success', 'Classe mise à jour.');
     }
 
-    public function destroy(SchoolClass $schoolClass)
+    public function destroy(SchoolClass $class)
     {
-        $schoolClass->delete();
+        $class->delete();
+
         return redirect()->route('classes.index')->with('success', 'Classe supprimée.');
     }
 }

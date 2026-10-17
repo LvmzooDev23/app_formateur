@@ -33,7 +33,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->date('date');
-            $table->enum('status', ['present', 'absent', 'late']);
+
             $table->text('note')->nullable();
             $table->timestamps();
         });

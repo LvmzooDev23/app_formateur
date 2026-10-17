@@ -12,7 +12,7 @@
                     @csrf @method('PUT')
                     <div>
                         <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">Nom de la classe</label>
-                        <input type="text" name="name" id="name" value="{{ $class->name }}" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required autofocus>
+                        <input type="text" name="name" id="name" value="{{ old('name', $class->name) }}" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required autofocus>
                     </div>
                     <div class="flex justify-end gap-3">
                         <a href="{{ route('classes.index') }}" class="px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Annuler</a>
