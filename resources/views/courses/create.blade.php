@@ -12,16 +12,29 @@
                     @csrf
                     <div>
                         <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">Nom du cours</label>
-                        <input type="text" name="name" id="name" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required autofocus placeholder="ex: Programmation Laravel">
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required autofocus placeholder="ex: Programmation Laravel">
                     </div>
                     <div>
-                        <label for="class_id" class="block text-sm font-semibold text-slate-700 mb-2">Classe rattachée</label>
-                        <select name="class_id" id="class_id" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required>
-                            <option value="">-- Sélectionner une classe --</option>
+                        <div class="flex items-center justify-between gap-4 mb-2">
+                            <p class="text-sm font-semibold text-slate-700">Classes rattachées</p>
+                            <button type="button" id="select-all-classes" class="text-xs font-medium text-indigo-600 hover:text-indigo-800 transition-all">Sélectionner tout</button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             @foreach($classes as $class)
-                                <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                <label class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-100 transition-all">
+                                    <input type="checkbox" name="class_ids[]" value="{{ $class->id }}" class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4" {{ in_array($class->id, (array) old('class_ids', [])) ? 'checked' : '' }}>
+                                    <span class="text-sm font-medium text-slate-700">{{ $class->name }}</span>
+                                </label>
                             @endforeach
-                        </select>
+                        </div>
+                        @error('class_ids')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                        @foreach($errors->get('class_ids.*') as $messages)
+                            @foreach($messages as $message)
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @endforeach
+                        @endforeach
                     </div>
                     <div class="flex justify-end gap-3 pt-4">
                         <a href="{{ route('courses.index') }}" class="px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Annuler</a>
@@ -33,4 +46,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('select-all-classes').addEventListener('click', () => {
+            document.querySelectorAll('input[name="class_ids[]"]').forEach((checkbox) => {
+                checkbox.checked = true;
+            });
+        });
+    </script>
 </x-app-layout>

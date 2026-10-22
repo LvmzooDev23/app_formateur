@@ -36,6 +36,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">{{ $class->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-slate-600">
                                     <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded-full font-medium text-xs">{{ $class->students_count }}</span>
+                                    <a href="{{ route('classes.show', $class) }}" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-medium px-3 py-1.5 rounded-lg text-xs transition-all">Voir les étudiants</a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-slate-600">
                                     <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded-full font-medium text-xs">{{ $class->courses_count }}</span>

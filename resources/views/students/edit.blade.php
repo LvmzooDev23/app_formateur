@@ -1,4 +1,4 @@
-<x-app-//layout>
+<x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-bold text-slate-900 leading-tight">Modifier l'Étudiant</h2>

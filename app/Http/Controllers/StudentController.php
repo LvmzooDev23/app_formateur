@@ -13,9 +13,12 @@ class StudentController extends Controller
         return view('students.index', ['students' => Student::with('schoolClass')->get()]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('students.create', ['classes' => SchoolClass::all()]);
+        return view('students.create', [
+            'classes' => SchoolClass::all(),
+            'selectedClassId' => $request->query('class_id'),
+        ]);
     }
 
     public function store(Request $request)

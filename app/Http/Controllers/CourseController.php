@@ -20,11 +20,19 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'class_id' => 'required|exists:school_classes,id',
+            'class_ids' => 'required|array|min:1',
+            'class_ids.*' => 'exists:school_classes,id',
         ]);
-        Course::create($request->all());
+
+        foreach ($validated['class_ids'] as $classId) {
+            Course::create([
+                'name' => $validated['name'],
+                'class_id' => $classId,
+            ]);
+        }
+
         return redirect()->route('courses.index')->with('success', 'Cours créé.');
     }
 

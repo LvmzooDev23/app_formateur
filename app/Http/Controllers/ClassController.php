@@ -14,6 +14,13 @@ class ClassController extends Controller
         return view('classes.index', compact('classes'));
     }
 
+    public function show($id)
+    {
+        $class = SchoolClass::with(['students', 'courses'])->findOrFail($id);
+
+        return view('classes.show', compact('class'));
+    }
+
     public function create()
     {
         return view('classes.create');

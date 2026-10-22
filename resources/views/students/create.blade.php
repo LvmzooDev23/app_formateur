@@ -25,7 +25,7 @@
                         <select name="class_id" id="class_id" class="w-full border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm py-2.5 shadow-sm" required>
                             <option value="">-- Sélectionner une classe --</option>
                             @foreach($classes as $class)
-                                <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                <option value="{{ $class->id }}" {{ old('class_id', $selectedClassId) == $class->id ? 'selected' : '' }}>{{ $class->name }}</option>
                             @endforeach
                         </select>
                     </div>
